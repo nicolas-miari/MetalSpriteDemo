@@ -88,7 +88,7 @@ class Renderer: NSObject {
             return
         }
 
-        let metalColor = MTLClearColor(red: 1, green: 0, blue: 0, alpha: 1)
+        let metalColor = MTLClearColor(red: 1, green:0, blue: 0, alpha: 1)
 
         resolveRenderPassDescriptor.colorAttachments[0].texture = drawable.texture
         resolveRenderPassDescriptor.colorAttachments[0].loadAction = .clear
@@ -208,8 +208,8 @@ fileprivate func createRenderPipelineState(for view: MTKView) throws -> MTLRende
     descriptor.colorAttachments[0].sourceRGBBlendFactor = .one
     descriptor.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
 
-    descriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusDestinationAlpha
-    descriptor.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusDestinationAlpha
+    descriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
+    descriptor.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
 
     return try device.makeRenderPipelineState(descriptor: descriptor)
 }

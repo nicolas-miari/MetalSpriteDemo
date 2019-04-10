@@ -39,8 +39,8 @@ class ViewController: NSViewController {
 
         let options: [MTKTextureLoader.Option: Any] = [
             .textureUsage: NSNumber(value: MTLTextureUsage.shaderRead.rawValue),
-            .textureStorageMode: NSNumber(value: MTLStorageMode.private.rawValue),
-            .SRGB: NSNumber(value: true) // TEST...
+            .textureStorageMode: NSNumber(value: MTLStorageMode.private.rawValue)//,
+            //.SRGB: NSNumber(value: true) // TEST...
         ]
         textureLoader.newTexture(name: "Texture", scaleFactor: 1, bundle: nil, options: options) { [unowned self](texture, error) in
             guard let texture = texture else {
