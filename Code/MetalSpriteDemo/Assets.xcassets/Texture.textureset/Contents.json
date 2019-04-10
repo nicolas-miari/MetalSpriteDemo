@@ -1,4 +1,7 @@
 {
+  "properties" : {
+    "interpretation" : "non-premultiplied-colors"
+  },
   "info" : {
     "version" : 1,
     "author" : "xcode"
@@ -6,7 +9,7 @@
   "textures" : [
     {
       "idiom" : "universal",
-      "filename" : "Universal.mipmapset"
+      "filename" : "Universal-1.mipmapset"
     }
   ]
 }

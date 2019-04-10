@@ -25,6 +25,8 @@ class ViewController: NSViewController {
 
         let metalView = MTKView(frame: view.bounds, device: device)
 
+        metalView.colorPixelFormat = .bgra8Unorm_srgb
+        metalView.colorspace = view.window?.colorSpace?.cgColorSpace
         view.addSubview(metalView)
 
         do {
@@ -35,12 +37,13 @@ class ViewController: NSViewController {
             return
         }
 
+
         self.textureLoader = MTKTextureLoader(device: device)
 
         let options: [MTKTextureLoader.Option: Any] = [
+            .SRGB: NSNumber(value: true),
             .textureUsage: NSNumber(value: MTLTextureUsage.shaderRead.rawValue),
-            .textureStorageMode: NSNumber(value: MTLStorageMode.private.rawValue)//,
-            //.SRGB: NSNumber(value: true) // TEST...
+            .textureStorageMode: NSNumber(value: MTLStorageMode.private.rawValue)
         ]
         textureLoader.newTexture(name: "Texture", scaleFactor: 1, bundle: nil, options: options) { [unowned self](texture, error) in
             guard let texture = texture else {
@@ -48,8 +51,17 @@ class ViewController: NSViewController {
             }
             // Pass the created texture and render:
             self.renderer.texture = texture
-            self.renderer.render()
+
+            metalView.delegate = self
         }
     }
 }
 
+extension ViewController: MTKViewDelegate {
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+    }
+
+    func draw(in view: MTKView) {
+        renderer.render()
+    }
+}
